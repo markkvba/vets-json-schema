@@ -1,6 +1,6 @@
-require 'json'
-
 Gem::Specification.new do |gem|
+  require 'json'
+
   gem.name = 'vets_json_schema'
 
   gem.version = JSON.parse(File.read('package.json'))['version']
