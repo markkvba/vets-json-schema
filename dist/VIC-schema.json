@@ -833,13 +833,6 @@
     "phone": {
       "type": "string",
       "minLength": 10
-    },
-    "gender": {
-      "type": "string",
-      "enum": [
-        "F",
-        "M"
-      ]
     }
   },
   "properties": {
@@ -889,10 +882,6 @@
       },
       "minItems": 1
     },
-    "veteranDateOfBirth": {
-      "type": "string",
-      "format": "date"
-    },
     "privacyAgreementAccepted": {
       "$ref": "#/definitions/privacyAgreementAccepted"
     },
@@ -907,9 +896,6 @@
     },
     "phone": {
       "$ref": "#/definitions/phone"
-    },
-    "gender": {
-      "$ref": "#/definitions/gender"
     }
   },
   "required": [
