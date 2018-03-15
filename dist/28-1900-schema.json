@@ -280,31 +280,6 @@
     "phone": {
       "type": "string",
       "minLength": 10
-    },
-    "serviceHistory": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "serviceBranch": {
-            "type": "string"
-          },
-          "dateRange": {
-            "$ref": "#/definitions/dateRange"
-          },
-          "dischargeType": {
-            "type": "string",
-            "enum": [
-              "honorable",
-              "general",
-              "other",
-              "bad-conduct",
-              "dishonorable",
-              "undesirable"
-            ]
-          }
-        }
-      }
     }
   },
   "properties": {
@@ -442,7 +417,37 @@
       "$ref": "#/definitions/phone"
     },
     "serviceHistory": {
-      "$ref": "#/definitions/serviceHistory"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "serviceBranch": {
+            "type": "string"
+          },
+          "dateRange": {
+            "$ref": "#/definitions/dateRange",
+            "required": [
+              "from",
+              "to"
+            ]
+          },
+          "dischargeType": {
+            "type": "string",
+            "enum": [
+              "honorable",
+              "general",
+              "other",
+              "bad-conduct",
+              "dishonorable",
+              "undesirable"
+            ]
+          },
+          "required": [
+            "serviceBranch",
+            "dischargeType"
+          ]
+        }
+      }
     }
   },
   "required": [

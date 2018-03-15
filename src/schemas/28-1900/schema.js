@@ -4,6 +4,17 @@ import definitions from '../../common/definitions';
 import originalDefinitions from '../../common/definitions';
 import schemaHelpers from '../../common/schema-helpers';
 
+let requiredServiceHistory = _.merge(definitions.serviceHistory, {
+  items: {
+    properties: {
+      required: ['serviceBranch', 'dischargeType'],
+      dateRange: {
+        required:['from', 'to']
+      }
+    }
+  }
+});
+
 let schema = {
   $schema: 'http://json-schema.org/draft-04/schema#',
   title: 'DISABLED VETERANS APPLICATION FOR VOCATIONAL REHABILITATION (28-1900)',
@@ -117,9 +128,10 @@ let schema = {
   ['address', 'hospitalAddress'],
   ['phone', 'daytimePhone'],
   ['phone', 'eveningPhone'],
-  ['serviceHistory']
 ].forEach((args) => {
   schemaHelpers.addDefinitionToSchema(schema, ...args);
 });
+
+schema.properties.serviceHistory = requiredServiceHistory;
 
 export default schema;
