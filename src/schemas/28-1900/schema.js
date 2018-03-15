@@ -4,13 +4,13 @@ import definitions from '../../common/definitions';
 import originalDefinitions from '../../common/definitions';
 import schemaHelpers from '../../common/schema-helpers';
 
-let requiredServiceHistory = _.merge(definitions.serviceHistory, {
+let requiredServiceHistory = _.merge(_.cloneDeep(definitions.serviceHistory), {
   items: {
     properties: {
       required: ['serviceBranch', 'dischargeType'],
-      dateRange: {
+      dateRange: _.merge(_.cloneDeep(definitions.dateRange), {
         required:['from', 'to']
-      }
+      })
     }
   }
 });

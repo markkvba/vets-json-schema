@@ -426,6 +426,15 @@
           },
           "dateRange": {
             "$ref": "#/definitions/dateRange",
+            "type": "object",
+            "properties": {
+              "from": {
+                "$ref": "#/definitions/date"
+              },
+              "to": {
+                "$ref": "#/definitions/date"
+              }
+            },
             "required": [
               "from",
               "to"
