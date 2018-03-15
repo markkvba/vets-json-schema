@@ -449,12 +449,12 @@
               "dishonorable",
               "undesirable"
             ]
-          },
-          "required": [
-            "serviceBranch",
-            "dischargeType"
-          ]
-        }
+          }
+        },
+        "required": [
+          "serviceBranch",
+          "dischargeType"
+        ]
       }
     }
   },
