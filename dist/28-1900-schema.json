@@ -455,7 +455,8 @@
           "serviceBranch",
           "dischargeType"
         ]
-      }
+      },
+      "minItems": 1
     }
   },
   "required": [
