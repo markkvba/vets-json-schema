@@ -210,7 +210,27 @@ const schema = {
         unitAssigned: { $ref: '#/definitions/unitAssigned' },
         unitAssignedDates: { $ref: '#/definitions/unitAssignedDates' }
       }
-    }
+    },
+    attachments: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['name', 'attachmentId'],
+        properties: {
+          name: {
+            type: 'string'
+          },
+          confirmationCode: {
+            type: 'string'
+          },
+          attachmentId: {
+            type: 'string',
+            enum: documentTypes526.map(doc => doc.value),
+            enumNames: documentTypes526.map(doc => doc.label)
+          }
+        }
+      }
+    },
   },
   properties: {
     alternateNames: {
@@ -491,24 +511,7 @@ const schema = {
       }
     },
     attachments: {
-      type: 'array',
-      items: {
-        type: 'object',
-        required: ['name', 'attachmentId'],
-        properties: {
-          name: {
-            type: 'string'
-          },
-          confirmationCode: {
-            type: 'string'
-          },
-          attachmentId: {
-            type: 'string',
-            enum: documentTypes526.map(doc => doc.value),
-            enumNames: documentTypes526.map(doc => doc.label)
-          }
-        }
-      }
+      $ref: '#/definitions/attachments',
     },
     bankAccountType: {
       type: 'string',
@@ -734,48 +737,45 @@ const schema = {
         }
       }
     },
-    privateMedicalRecordAttachments: {
-      type: 'array',
-      items: {
-        type: 'object',
-        required: ['name', 'attachmentId'],
-        properties: {
-          name: {
-            type: 'string',
-          },
-          confirmationCode: {
-            type: 'string',
-          },
-          attachmentId: {
-            type: 'string',
-            enum: ['L107', 'L023', 'L023'],
-            enumNames: [
-              'VA 21-4142 Authorization for Release of Information',
-              'Multiple Documents',
-              'Other',
-            ],
+    privateMedicalRecordAttachments: _.merge(
+      { $ref: '#/definitions/attachments' },
+      {
+        type: 'array',
+        items: {
+          properties: {
+            attachmentId: {
+              enum: ['L107', 'L023', 'L023'],
+              enumNames: [
+                'VA 21-4142 Authorization for Release of Information',
+                'Multiple Documents',
+                'Other',
+              ],
+            },
           },
         },
       },
-    },
-    completedFormAttachments: {
-      type: 'array',
-      items: {
-        type: 'object',
-        required: ['name', 'attachmentId'],
-        properties: {
-          name: {
-            type: 'string',
-          },
-          confirmationCode: {
-            type: 'string',
-          },
-          attachmentId: {
-            type: 'string',
+    ),
+    completedFormAttachments: _.merge(
+      { $ref: '#/definitions/attachments' },
+      {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['name', 'attachmentId'],
+          properties: {
+            name: {
+              type: 'string',
+            },
+            confirmationCode: {
+              type: 'string',
+            },
+            attachmentId: {
+              type: 'string',
+            },
           },
         },
       },
-    },
+    ),
   }
 };
 
